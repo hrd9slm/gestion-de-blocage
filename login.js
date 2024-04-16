@@ -2,21 +2,18 @@ let currentDate = new Date();
 let year = currentDate.getFullYear(); 
 let month = currentDate.getMonth() + 1; 
 let day = currentDate.getDate(); 
+
 let formattedDate = year + "-" + (month < 10 ? "0" + month : month) + "-" + (day < 10 ? "0" + day : day);
+
 console.log(formattedDate);
+
    let data=localStorage.getItem("users");
    let data_trainer=localStorage.getItem("users_trainer");
    //console.log(data);
-   var register_compter=2;
+   var register_compter=5;
   if (data==null){
  
-    let user={id:0,
-      first_name:"admin",
-      last_name:"admin",
-      email:"admin@gmail.com",
-      password:"123456",
-      blockages:[],
-      role:"admin"};
+   
     let user1 = {
       id: 1,
       first_name: "salma",
@@ -24,25 +21,7 @@ console.log(formattedDate);
       email: "salma@gmail.com",
       password: "123456",
       role: "student",
-      blockages: [{
-        trainer:"Trainer 1",
-        bootcamp:"Mern",
-        title:"mon premier blockage",
-        brief:"Brief 1",
-        difficulte:"qwee tdhdb cjvb",
-        date:formattedDate,
-        etat:false
-  
-      },{
-        trainer:"Trainer 2",
-        bootcamp:"Mern",
-        title:"mon 2 eme blockage",
-        brief:"Brief 1",
-        difficulte:"qwee tdhdb cjvb",
-        date:formattedDate,
-        etat:false
-  
-      }] 
+      blockages: [] 
   };
   let user2={id:2,
     first_name:"Trainer 1",
@@ -67,8 +46,8 @@ console.log(formattedDate);
         role:"admin"};
       
     
-    let users=[user,user1,user2,user3,user4];
-    let users_trainer=[user,user2,user3,user4];
+    let users=[user1,user2,user3,user4];
+    let users_trainer=[user2,user3,user4];
     let data=localStorage.setItem("users",JSON.stringify(users));
     let data_trainer=localStorage.setItem("users_trainer",JSON.stringify(users_trainer));
 
@@ -143,7 +122,7 @@ console.log(formattedDate);
 
     register_compter+=1;
  
-    // window.location.assign("student-dash.html");
+  
    }
    /* ************* *appel des fonctions ************* */
    let btn_login=document.getElementById("btn-login");

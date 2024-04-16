@@ -1,14 +1,11 @@
 /* ************* session user  *********************** */
 let user_session= JSON.parse(sessionStorage.getItem("user"));
-if (user_session.role==="admin"){
+if (user_session){
 let user_id=user_session.id;
 /*************data ********************** */
 let data = localStorage.getItem("users");
 let data_trainer = localStorage.getItem("users_trainer");
 let filteredUser = JSON.parse(data).filter(user => user.id === user_id);
-
-// console.log("filteredUser",data_trainer);
-
 
     /* ***************** add nav user name ********** */
    let name_position=document.getElementById("name");
@@ -36,13 +33,11 @@ let filteredUser = JSON.parse(data).filter(user => user.id === user_id);
              var index = parseInt(this.getAttribute("data-index"));
              let blockage=filteredUser[0].blockages[index];
                  modalFeedback.style.display = "block";
-           // console.log(filteredUser[0].blockages[index]);
                 
         document.getElementById("btn-feedback").addEventListener("click", function(e) {
         e.preventDefault();
             blockage.etat=true;
-       //     console.log(blockage.etat);
-              // Update localStorage
+   
                let blockage_update=[];
                let data_update=[];
                users.map(function(user) {
@@ -62,60 +57,33 @@ let filteredUser = JSON.parse(data).filter(user => user.id === user_id);
                           localStorage.setItem('users_trainer', JSON.stringify(data_update));
 
 
-                          /********************* student update */
+                          /********************* student update ***********/
                           var data = localStorage.getItem("users");
                           var filteredStudent = JSON.parse(data).filter(user => user.first_name ===filteredUser[0].blockages[index].student_first_name && user.last_name ===filteredUser[0].blockages[index].student_last_name );
                        
                           var blockages=filteredStudent[0].blockages;
                           var filtreBlockage=blockages.filter(blockage=> blockage.trainer === filteredUser[0].first_name);
                         
-                        //   filtreBlockage.map((bloc,index)=>{
-                        //     bloc.etat=true;
-                        //     console.log("bloc:",index,":",bloc.etat);
-                        //   })
-                     
-                      
-                        //   if (!filteredTrainer[0].blockages) {
-                        //    filteredTrainer.blockages = []; 
-                        //    }
-                        //    filteredTrainer[0].blockages.push(new_blockage_trainer);
-                        //    console.log("------>filteredTrainer:",filteredTrainer[0].blockages);
                              let data_users_update=[];
                              data_blocs_update=[];
                              JSON.parse(data).map(function(user) {
-
-                                console.log("**********************   debut de user **********************");
                                          if(user.first_name ===filteredUser[0].blockages[index].student_first_name && user.last_name ===filteredUser[0].blockages[index].student_last_name ) {
-                                            
-                
+
                                                     user.blockages.map(bloc=>{
                                                         
-                                                    //console.log(filteredUser[0]);
-                                                        //console.log("***************");
-                                                        //console.log("user.first_name",bloc.title );
-                                                        //console.log("trainer.student",filteredUser[0].blockages[index].title );
-                                                        //console.log("****************");
                                                             if(bloc.trainer === filteredUser[0].first_name && bloc.title===filteredUser[0].blockages[index].title ){
-                                                                console.log("salma");
-                                                                console.log(user);
                                                                 bloc.etat=true;
                                                                 }
                                                             })
                                         }     
-                                        console.log(user);
-                                        //console.log("----------------->");
-                                        console.log("*************************   fin de user  *********************");
-                                        console.log("                                               ");
                                             data_users_update.push(user);      
                                           })
             
                              localStorage.setItem('users',JSON.stringify(data_users_update));
-                             
-                            // console.log(JSON.parse(localStorage.getItem('users')));
-                          /*********** close */
              modalFeedback.style.display = "none";
              readAll(user_id);
-});
+
+             location.reload(true);           });
              
         
         });
